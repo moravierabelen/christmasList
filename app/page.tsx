@@ -1,57 +1,78 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Image from "next/image";
+import styles from "./page.module.css";
+import { El_Messiri, Mountains_of_Christmas } from "@next/font/google";
+
+const ChristmasFont = Mountains_of_Christmas({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const MessiriFont = El_Messiri({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+type IGift = {
+  name: string;
+  link: string;
+};
+
+const myGifts = [
+  {
+    name: "Bebedero para Azu",
+    link: "https://articulo.mercadolibre.com.ar/MLA-1128585130-bebedero-catit-pixi-fountain-gatos-automatico-25-l-filtro-_JM?searchVariation=174324960770#is_advertising=true&searchVariation=174324960770&position=9&search_layout=stack&type=pad&tracking_id=be3180db-8a69-4ee2-9e97-1dee2d329076&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=9&ad_click_id=OWVmODA3ZmYtYWFhNC00ODRiLTg2OTctN2E5MGE4MmJmYzFm",
+  },
+  {
+    name: "Cajón de salto",
+    link: "",
+  },
+];
+
+const mySisterGifts = [
+  {
+    name: "Remera",
+    link: "https://www.cibelesonline.com.ar/productos/remera-deep/",
+  },
+  {
+    name: "Bikini",
+    link: "https://www.cibelesonline.com.ar/productos/bikini-aries/",
+  },
+];
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js 13!</a>
+    <main className="h-screen p-14">
+      <div className={ChristmasFont.className}>
+        <h1 className="text-red-500 text-5xl">
+          Nuestros deseos para familiares y amigues
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://beta.nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js 13</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Explore the Next.js 13 playground.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates/next.js/app-directory?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>Deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
+      </div>
+      <div className={MessiriFont.className}>
+        <div className="gifts-list-container text-2xl font-bold">
+          <h2 className="mt-16">Yo</h2>
+          <div className="pl-8 font-normal text-3xl">
+            <ol>
+              {myGifts.map((gift: IGift, i) => (
+                <li key={i}>
+                  <a href={gift.link} target="_blank" rel="noreferrer">
+                    {gift.name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <h2 className="mt-16">Magui</h2>
+          <div className="pl-8 font-normal text-3xl">
+            <ol>
+              {mySisterGifts.map((gift: IGift, i) => (
+                <li key={i}>
+                  <a href={gift.link} target="_blank" rel="noreferrer">{gift.name}</a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+      </div>
+    </main>
+  );
 }
